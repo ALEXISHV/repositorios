@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecos del Universo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #e9ecff;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(78, 56, 145, .35), transparent 25%),
+                radial-gradient(circle at 80% 30%, rgba(15, 75, 120, .28), transparent 28%),
+                linear-gradient(135deg, #050713, #090b1c 50%, #02030a);
+            line-height: 1.6;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 28px 7%;
+            background:
+                linear-gradient(rgba(2, 3, 10, .65), rgba(2, 3, 10, .92)),
+                url("https://images-assets.nasa.gov/image/PIA12348/PIA12348~orig.jpg") center/cover;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 999px;
+            background: rgba(5,7,20,.55);
+            transition: .25s;
+        }
+
+        nav a:hover {
+            background: rgba(103, 86, 210, .45);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            max-width: 850px;
+            padding-bottom: 55px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 6px 12px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 999px;
+            font-size: .85rem;
+            margin-bottom: 18px;
+            color: #cfd4ff;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            line-height: .95;
+            margin-bottom: 25px;
+            letter-spacing: -4px;
+        }
+
+        .hero p {
+            max-width: 720px;
+            font-size: 1.15rem;
+            color: #c5c9df;
+        }
+
+        main {
+            width: min(1180px, 92%);
+            margin: auto;
+        }
+
+        section {
+            padding: 85px 0;
+        }
+
+        .section-title {
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #aeb4ce;
+            max-width: 750px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        article {
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 22px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 45px rgba(0,0,0,.18);
+        }
+
+        article h3 {
+            font-size: 1.55rem;
+            margin-bottom: 8px;
+        }
+
+        article p {
+            color: #b9bfd7;
+        }
+
+        .number {
+            color: #a3aaff;
+            font-weight: bold;
+            font-size: .9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        figure {
+            margin-top: 20px;
+        }
+
+        figure img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,.1);
+        }
+
+        figcaption {
+            font-size: .88rem;
+            color: #9da4c0;
+            margin-top: 8px;
+        }
+
+        .video {
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,.10);
+            background: #000;
+        }
+
+        .video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .article-audio {
+            margin-top: 18px;
+        }
+
+        .audio-box {
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 22px;
+            padding: 25px;
+        }
+
+        audio {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .note {
+            padding: 18px;
+            border-left: 4px solid #8f96ff;
+            background: rgba(143,150,255,.08);
+            color: #c9cdef;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        mark {
+            background: #c9ccff;
+            color: #101226;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 22px;
+            padding: 25px;
+        }
+
+        label {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            color: #dce0f4;
+        }
+
+        input, button {
+            font: inherit;
+        }
+
+        input {
+            width: 100%;
+            padding: 11px 13px;
+            color: #eef0ff;
+            background: #090c1d;
+            border: 1px solid #363b62;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #9ba1ff;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: 0;
+            border-radius: 10px;
+            cursor: pointer;
+            background: #aeb3ff;
+            color: #101226;
+            font-weight: bold;
+        }
+
+        button:hover {
+            filter: brightness(1.08);
+        }
+
+        progress {
+            width: 100%;
+            height: 18px;
+        }
+
+        .canvas-wrap {
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            padding: 15px;
+        }
+
+        canvas {
+            width: 500px;
+            height: 200px;
+            max-width: 100%;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 12px;
+            background: #040611;
+        }
+
+        aside {
+            padding: 30px 0 80px;
+        }
+
+        details {
+            background: rgba(255,255,255,.045);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 16px;
+            padding: 18px 20px;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        footer {
+            padding: 45px 7%;
+            border-top: 1px solid rgba(255,255,255,.10);
+            color: #aeb4ce;
+            text-align: center;
+            background: rgba(0,0,0,.2);
+        }
+
+        @media (max-width: 850px) {
+            .grid, form {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav aria-label="Navegación principal">
+            <a href="#inicio">Inicio</a>
+            <a href="#ecos">Seis ecos</a>
+            <a href="#formulario">Explora</a>
+            <a href="#canvas">Canvas</a>
+            <a href="#fuentes">Fuentes</a>
+        </nav>
+
+        <section class="hero" id="inicio">
+            <span class="tag"></span>
+            <h1>ECOS DEL<br>UNIVERSO</h1>
+            <p>
+                Un recorrido por seis fenómenos cósmicos que han sido convertidos
+                en <mark>sonificaciones</mark>: datos astronómicos transformados
+                en sonidos para que podamos experimentar el universo con el oído.
+            </p>
+        </section>
+    </header>
+
+    <main>
+
+        <section id="ecos">
+            <div class="section-title">
+                <h2>Seis sonidos que parecen imposibles</h2>
+                <p>
+                    El espacio interestelar es, en gran parte, un vacío y el sonido
+                    no se propaga por él como lo hace en la atmósfera terrestre.
+                    Estas piezas representan datos reales mediante técnicas de
+                    sonificación.
+                </p>
+            </div>
+
+            <div class="grid">
+
+                <article>
+                    <div class="number">01 · Pulsar</div>
+                    <h3>El latido de un púlsar</h3>
+                    <p>
+                        Un púlsar es una estrella de neutrones que gira rápidamente.
+                        En la Nebulosa del Cangrejo, el púlsar aparece como el
+                        "corazón" del remanente de una supernova. La sonificación
+                        de NASA utiliza datos de distintos telescopios y sonidos
+                        asignados a diferentes longitudes de onda.
+                    </p>
+
+                    <figure>
+                        <img src="imagenes/pulsar.jpg"
+                             alt="Nebulosa del Cangrejo observada por telescopios">
+                        <figcaption>Nebulosa del Cangrejo y su púlsar central.</figcaption>
+                    </figure>
+
+                    <figure class="article-audio">
+                        <audio controls>
+                            <source src="audio/pulsar.mp3" type="audio/mpeg">
+                            <source src="audio/pulsar.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento audio.
+                        </audio>
+                        <figcaption>Sonificación del púlsar de la Nebulosa del Cangrejo.</figcaption>
+                    </figure>
+
+                    <div class="video">
+                        <video controls preload="metadata">
+                            <source src="video/pulsar.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento video.
+                        </video>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="number">02 · Agujero negro</div>
+                    <h3>El sonido de M87</h3>
+                    <p>
+                        El agujero negro supermasivo del centro de M87 fue estudiado
+                        con datos de rayos X, luz visible y ondas de radio. NASA
+                        convirtió esas señales en diferentes rangos de tonos para
+                        crear una sonificación.
+                    </p>
+
+                    <figure>
+                        <img src="imagenes/m87.jpg"
+                             alt="Agujero negro supermasivo en la galaxia M87">
+                        <figcaption>M87: región galáctica asociada con un agujero negro supermasivo.</figcaption>
+                    </figure>
+
+                    <figure class="article-audio">
+                        <audio controls>
+                            <source src="audio/m87.mp3" type="audio/mpeg">
+                            <source src="audio/m87.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento audio.
+                        </audio>
+                        <figcaption>Sonificación de datos del agujero negro de M87.</figcaption>
+                    </figure>
+
+                    <div class="video">
+                        <video controls preload="metadata">
+                            <source src="video/m87.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento video.
+                        </video>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="number">03 · Nebulosa</div>
+                    <h3>Los Pilares de la Creación</h3>
+                    <p>
+                        Los Pilares de la Creación son enormes estructuras de gas
+                        y polvo dentro de la Nebulosa del Águila. Sus formas están
+                        relacionadas con la radiación y los vientos estelares de
+                        estrellas jóvenes.
+                    </p>
+
+                    <figure>
+                        <img src="imagenes/pilares.jpg"
+                             alt="Pilares de la Creación captados por el telescopio Webb">
+                        <figcaption>Vista infrarroja de los Pilares de la Creación.</figcaption>
+                    </figure>
+
+                    <figure class="article-audio">
+                        <audio controls>
+                            <source src="audio/pilares.mp3" type="audio/mpeg">
+                            <source src="audio/pilares.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento audio.
+                        </audio>
+                        <figcaption>Sonificación de los Pilares de la Creación (datos del Webb).</figcaption>
+                    </figure>
+
+                    <div class="video">
+                        <video controls preload="metadata">
+                            <source src="video/pilares.mp4" type="video/mp4">
+                            <source src="video/pilares-alternativo.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento video.
+                        </video>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="number">04 · Ojo de Dios</div>
+                    <h3>La Nebulosa de la Hélice</h3>
+                    <p>
+                        La Nebulosa de la Hélice, NGC 7293, es conocida popularmente
+                        como el "Ojo de Dios" por su apariencia. Para este proyecto
+                        se presenta como un paisaje cósmico inquietante acompañado
+                        por una sonificación ambiental.
+                    </p>
+
+                    <figure>
+                        <img src="imagenes/ojo-de-dios.jpg"
+                             alt="Nebulosa de la Hélice, conocida como Ojo de Dios">
+                        <figcaption>La Nebulosa de la Hélice, NGC 7293.</figcaption>
+                    </figure>
+
+                    <figure class="article-audio">
+                        <audio controls>
+                            <source src="audio/ojo-de-dios.mp3" type="audio/mpeg">
+                            <source src="audio/ojo-de-dios.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento audio.
+                        </audio>
+                        <figcaption>Sonificación ambiental de la Nebulosa de la Hélice.</figcaption>
+                    </figure>
+
+                    <div class="video">
+                        <video controls preload="metadata">
+                            <source src="video/ojo-de-dios.mp4" type="video/mp4">
+                            <source src="video/ojo-de-dios-alternativo.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento video.
+                        </video>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="number">05 · Supernova</div>
+                    <h3>El eco de una explosión estelar</h3>
+                    <p>
+                        Supernova 1987A fue una explosión estelar observada en la
+                        Gran Nube de Magallanes. NASA convirtió observaciones de
+                        Chandra y Hubble en una pieza donde los datos visuales se
+                        traducen a notas musicales.
+                    </p>
+
+                    <figure>
+                        <img src="imagenes/supernova.jpg"
+                             alt="Representación de una supernova observada por telescopios">
+                        <figcaption>Una supernova observada mediante datos astronómicos.</figcaption>
+                    </figure>
+
+                    <figure class="article-audio">
+                        <audio controls>
+                            <source src="audio/supernova-1987a.mp3" type="audio/mpeg">
+                            <source src="audio/supernova-1987a.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento audio.
+                        </audio>
+                        <figcaption>Sonificación de datos de Chandra y Hubble sobre SN 1987A.</figcaption>
+                    </figure>
+
+                    <div class="video">
+                        <video controls preload="metadata">
+                            <source src="video/supernova-1987a.mp4" type="video/mp4">
+                            <source src="video/supernova-1987a-alternativo.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento video.
+                        </video>
+                    </div>
+                </article>
+
+                <article>
+                    <div class="number">06 · Espacio profundo</div>
+                    <h3>El centro de la Vía Láctea</h3>
+                    <p>
+                        El centro de nuestra galaxia contiene una enorme concentración
+                        de estrellas, gas y polvo alrededor de un agujero negro
+                        supermasivo. NASA genera una sonificación donde la intensidad
+                        de la luz controla el volumen y la posición se relaciona con
+                        la altura de los tonos.
+                    </p>
+
+                    <figure>
+                        <img src="imagenes/espacio-profundo.jpg"
+                             alt="Región del espacio profundo con estrellas y gas">
+                        <figcaption>Representación visual del espacio profundo.</figcaption>
+                    </figure>
+
+                    <figure class="article-audio">
+                        <audio controls>
+                            <source src="audio/centro-via-lactea.mp3" type="audio/mpeg">
+                            <source src="audio/centro-via-lactea.ogg" type="audio/ogg">
+                            Tu navegador no soporta el elemento audio.
+                        </audio>
+                        <figcaption>Sonificación del centro galáctico de la Vía Láctea.</figcaption>
+                    </figure>
+
+                    <div class="video">
+                        <video controls preload="metadata">
+                            <source src="video/centro-via-lactea.mp4" type="video/mp4">
+                            <source src="video/centro-via-lactea-alternativo.mp4" type="video/mp4">
+                            Tu navegador no soporta el elemento video.
+                        </video>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="formulario">
+            <div class="section-title">
+                <h2>Tu exploración cósmica</h2>
+
+            </div>
+
+            <form>
+                <label>
+                    Correo electrónico
+                    <input type="email" placeholder="astronauta@universo.com" required>
+                </label>
+
+                <label>
+                    Sitio o referencia web
+                    <input type="url" placeholder="https://ejemplo.com">
+                </label>
+
+                <label>
+                    Cantidad de objetos estudiados
+                    <input type="number" min="1" max="100" step="1" placeholder="6">
+                </label>
+
+                <label>
+                    Nivel de misterio
+                    <input type="range" min="0" max="100" value="80">
+                </label>
+
+                <label>
+                    Fecha de observación
+                    <input type="date">
+                </label>
+
+                <label>
+                    Color de tu galaxia favorita
+                    <input type="color" value="#6f72ff">
+                </label>
+
+                <label>
+                    Teléfono
+                    <input type="tel" placeholder="+52 000 000 0000">
+                </label>
+
+                <label>
+                    Buscar fenómeno
+                    <input type="search" list="fenomenos" placeholder="Púlsar, nebulosa...">
+                    <datalist id="fenomenos">
+                        <option value="Púlsar">
+                        <option value="Agujero negro">
+                        <option value="Pilares de la Creación">
+                        <option value="Nebulosa de la Hélice">
+                        <option value="Supernova">
+                    </datalist>
+                </label>
+
+                <label class="full">
+                    Progreso del recorrido
+                    <progress value="66" max="100">66%</progress>
+                </label>
+
+                <button class="full" type="submit">Enviar exploración</button>
+            </form>
+        </section>
+
+        <section id="canvas">
+            <div class="section-title">
+                <h2>Mapa de ecos · Canvas</h2>
+                <p>
+                    El siguiente lienzo de 500 × 200 píxeles muestra elementos
+                    dibujados con JavaScript: un rectángulo, texto y un círculo.
+                </p>
+            </div>
+
+            <div class="canvas-wrap">
+                <canvas id="universoCanvas" width="500" height="200">
+                    Tu navegador no soporta el elemento canvas.
+                </canvas>
+            </div>
+        </section>
+
+        <aside id="fuentes">
+            <details>
+                <summary>Créditos y fuentes audiovisuales</summary>
+                <p>
+                    El contenido astronómico y varias sonificaciones audiovisuales
+                    están inspirados en materiales de NASA, NASA Science, NASA
+                    Goddard, Chandra X-ray Observatory y NASA/JPL-Caltech.
+                    Los videos están incrustados desde YouTube y se reproducen
+                    según las condiciones de la plataforma.
+                </p>
+            </details>
+        </aside>
+
+    </main>
+
+    <footer>
+        <p>
+            Elaborado por: Cristian Alexis Hernández Velázquez —
+            Licenciatura en Sistemas Computacionales (LSC) — Práctica 4 —
+            <time datetime="2026-08-31">31 de agosto de 2026</time>
+        </p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById("universoCanvas");
+        const ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "#040611";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "#343a92";
+        ctx.fillRect(35, 45, 165, 90);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 24px Arial";
+        ctx.fillText("ECOS DEL UNIVERSO", 52, 96);
+
+        ctx.beginPath();
+        ctx.arc(380, 100, 55, 0, Math.PI * 2);
+        ctx.fillStyle = "#aeb3ff";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(380, 100, 75, 0, Math.PI * 2);
+        ctx.strokeStyle = "#777fca";
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(380, 100, 22, 0, Math.PI * 2);
+        ctx.fillStyle = "#080a18";
+        ctx.fill();
+    </script>
+
+</body>
+</html>
