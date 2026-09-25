@@ -72,5 +72,5 @@ function cambiarFondo(colorHex) {
     const seccion = document.getElementById('sec-estilos');
     if (seccion) {
         seccion.style.backgroundColor = '#' + colorHex;
-    }
+  }
 }
